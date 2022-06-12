@@ -11,6 +11,7 @@ function App() {
 
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
+  const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
 
   useEffect(() => {
     axios.get(url)
@@ -19,19 +20,17 @@ function App() {
     }).catch(err => {
       setError(err);
     })
-  });
+  }, [url]);
 
   const handleChange = (e) => {
-    const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
-
+    
     if (e.key === "Enter") {
       axios.get(searchURL).then((res) => {
         setResults(res.data.results);
-        setImages("");
         setImages(results);
-        console.log(res.data);
+        handleChange('');
       }).catch(err => {
-        setError(err);
+        // setImages(images) ? setImages("") : setError(err);
       })
     }
   };
