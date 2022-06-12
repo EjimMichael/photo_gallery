@@ -2,18 +2,21 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f1ebeb;
 }
 
 .images {
-    max-width: 70rem;
-    margin: 4rem auto;
+    /* max-width: 70rem;
+    margin: 4rem auto; */
+    max-width: 98%;
+    margin: 15px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     grid-auto-rows: 500px;
 }
 
 img {
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 98%;
     object-fit: cover;
 }
