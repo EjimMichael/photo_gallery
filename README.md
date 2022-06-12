@@ -78,7 +78,8 @@ Dellons photo gallery is also user friendly and interactive so you won't have a 
 
 ### Code section
 
-` import './App.css';
+```javascript
+import './App.css';
 import {useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from "@mui/icons-material/Search";
@@ -146,5 +147,6 @@ function App() {
   );
 }
 
-export default App;`
+export default App;
+```
 
