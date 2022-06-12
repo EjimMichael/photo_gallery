@@ -1,7 +1,7 @@
 import './App.css';
 import {useState, useEffect } from 'react';
 import axios from 'axios';
-import SearchField from './SearchField';
+import SearchIcon from "@mui/icons-material/Search";
 
 function App() {
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
@@ -28,6 +28,8 @@ function App() {
     if (e.key === "Enter") {
       axios.get(searchURL).then((res) => {
         setResults(res.data.results);
+        setImages("");
+        setImages(results);
         console.log(res.data);
       });
     }
@@ -35,18 +37,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Photo Gallery</h1>
-
-      <div className="input">
+      <h1>Dellons Photo Gallery</h1>
+      <div className="search-bar">
+        <SearchIcon className="search-icon" />
         <input
           type="text"
           onChange={(e) => setSearchPhotos(e.target.value)}
           placeholder="Search photos"
           onKeyPress={handleChange}
         />
-
+      </div>
+      <div className="images">
         {results.map((result) => (
-          <img src={result.urls.thumb} key={result.id} alt="" />
+          <img src={result.urls.regular} key={result.id} alt="" />
         ))}
       </div>
 
