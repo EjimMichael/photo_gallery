@@ -79,6 +79,12 @@ function App() {
 export default App;
 ```
 ### The User Interface
+
 ![The UI](./src/images/galleryUI.PNG)
 When the website launches, it loads images from different categories and displays it for our view. 
 The search field located at the top middle corner of the screen allows you to search any image of your choice and it gets displayed on the screen.
+
+### Error 
+
+![The UI](./src/images/Error.PNG)
+When a user sends a bad request or when there is a bad network connection, a 404 error will be displayed on the screen showing that the request failed.

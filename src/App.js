@@ -6,7 +6,7 @@ import useFetch from './useFetch';
 function App() {
   const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const url = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
+  const url = `https://api.unsplash.com/photo/?client_id=${accessKey}`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState('');
 
