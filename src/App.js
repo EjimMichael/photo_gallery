@@ -37,15 +37,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Dellons Photo Gallery</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          onChange={(e) => setSearchPhotos(e.target.value)}
-          placeholder="Search photos"
-          onKeyPress={handleChange}
-        />
-        <SearchIcon className="search-icon" />
+      <div className="top">
+        <h1>Dellons Photo Gallery</h1>
+        <div className="search-bar">
+          <input
+            type="text"
+            onChange={(e) => setSearchPhotos(e.target.value)}
+            placeholder="Search photos"
+            onKeyPress={handleChange}
+          />
+          <SearchIcon className="search-icon" />
+        </div>
       </div>
       <div className="images">
         {results.map((result) => (
