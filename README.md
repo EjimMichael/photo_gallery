@@ -80,3 +80,5 @@ export default App;
 ```
 ### The User Interface
 ![The UI](./src/images/galleryUI.PNG)
+When the website launches, it loads images from different categories and displays it for our view. 
+The search field located at the top middle corner of the screen allows you to search any image of your choice and it gets displayed on the screen.
