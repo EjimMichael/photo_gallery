@@ -1,9 +1,10 @@
 import './App.css';
 import {useState, useEffect } from 'react';
-import axios from 'axios';
 import SearchIcon from "@mui/icons-material/Search";
+import useFetch from './useFetch';
 
 function App() {
+  const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
   const url = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
   const [images, setImages] = useState([]);
@@ -14,23 +15,23 @@ function App() {
   const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
 
   useEffect(() => {
-    axios.get(url)
+    axiosCall(url)
     .then(res => {
       setImages(res.data);
     }).catch(err => {
       setError(err);
     })
-  }, [url]);
+  }, [axiosCall, url]);
 
   const handleChange = (e) => {
     
     if (e.key === "Enter") {
-      axios.get(searchURL).then((res) => {
+      axiosCall(searchURL).then((res) => {
         setResults(res.data.results);
         setImages(results);
         handleChange('');
       }).catch(err => {
-        // setImages(images) ? setImages("") : setError(err);
+        setError(err);
       })
     }
   };
@@ -54,7 +55,6 @@ function App() {
           <img src={result.urls.regular} key={result.id} alt="" />
         ))}
       </div>
-      {/* <div className="error">{error.message}</div> */}
 
       <div className="images">
         {images.map((image) => (
