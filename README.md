@@ -70,3 +70,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
 
 # Dellons Photo Gallery
+### Description
+This Website is a photo gallery website that displays pictures sourced from the unsplash API and displays it on the page. it also allows you to search an image of any category and the website displays it for you.
