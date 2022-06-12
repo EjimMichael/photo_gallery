@@ -71,4 +71,80 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Dellons Photo Gallery
 ### Description
-This Website is a photo gallery website that displays pictures sourced from the unsplash API and displays it on the page. it also allows you to search an image of any category and the website displays it for you.
+This Website is a photo gallery website that displays pictures sourced from the unsplash API and displays it on the page. It also allows you to search an image of any category and the website displays it for you.
+It is was developed with React, HTML and CSS.
+
+Dellons photo gallery is also user friendly and interactive so you won't have a hard time using. It will be upgraded with time and users feedback will go a long way in helping the developer.
+
+### Code section
+
+` import './App.css';
+import {useState, useEffect } from 'react';
+import axios from 'axios';
+import SearchIcon from "@mui/icons-material/Search";
+
+function App() {
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+  const url = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
+  const [images, setImages] = useState([]);
+  const [error, setError] = useState('');
+
+  const [searchPhotos, setSearchPhotos] = useState("");
+  const [results, setResults] = useState([]);
+  const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
+
+  useEffect(() => {
+    axios.get(url)
+    .then(res => {
+      setImages(res.data);
+    }).catch(err => {
+      setError(err);
+    })
+  }, [url]);
+
+  const handleChange = (e) => {
+    
+    if (e.key === "Enter") {
+      axios.get(searchURL).then((res) => {
+        setResults(res.data.results);
+        setImages(results);
+        handleChange('');
+      }).catch(err => {
+        // setImages(images) ? setImages("") : setError(err);
+      })
+    }
+  };
+
+  return (
+    <div className="App">
+      <div className="top">
+        <h1>Dellons Photo Gallery</h1>
+        <div className="search-bar">
+          <input
+            type="text"
+            onChange={(e) => setSearchPhotos(e.target.value)}
+            placeholder="Search photos"
+            onKeyPress={handleChange}
+          />
+          <SearchIcon className="search-icon" />
+        </div>
+      </div>
+      <div className="images">
+        {results.map((result) => (
+          <img src={result.urls.regular} key={result.id} alt="" />
+        ))}
+      </div>
+      {/* <div className="error">{error.message}</div> */}
+
+      <div className="images">
+        {images.map((image) => (
+          <img src={image.urls.regular} key={image.id} alt="" />
+        ))}
+      </div>
+      <div className="error">{error.message}</div>
+    </div>
+  );
+}
+
+export default App;`
+
