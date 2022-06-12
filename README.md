@@ -88,3 +88,7 @@ The search field located at the top middle corner of the screen allows you to se
 
 ![The UI](./src/images/Error.PNG)
 When a user sends a bad request or when there is a bad network connection, a 404 error will be displayed on the screen showing that the request failed.
+
+### Useful Links
+[React website](https://reactjs.org/)
+[unsplash website](https://unsplash.com/)
