@@ -39,13 +39,13 @@ function App() {
     <div className="App">
       <h1>Dellons Photo Gallery</h1>
       <div className="search-bar">
-        <SearchIcon className="search-icon" />
         <input
           type="text"
           onChange={(e) => setSearchPhotos(e.target.value)}
           placeholder="Search photos"
           onKeyPress={handleChange}
         />
+        <SearchIcon className="search-icon" />
       </div>
       <div className="images">
         {results.map((result) => (
