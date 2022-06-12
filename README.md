@@ -79,4 +79,4 @@ function App() {
 export default App;
 ```
 ### The User Interface
-![The UI] (.src/images/galleryUI.PNG)
+![The UI] (.src\images\galleryUI.PNG)
