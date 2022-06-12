@@ -17,10 +17,9 @@ function App() {
     .then(res => {
       setImages(res.data);
     }).catch(err => {
-      console.log(err);
       setError(err);
     })
-  }, [url]);
+  });
 
   const handleChange = (e) => {
     const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
@@ -31,7 +30,9 @@ function App() {
         setImages("");
         setImages(results);
         console.log(res.data);
-      });
+      }).catch(err => {
+        setError(err);
+      })
     }
   };
 
@@ -54,6 +55,7 @@ function App() {
           <img src={result.urls.regular} key={result.id} alt="" />
         ))}
       </div>
+      {/* <div className="error">{error.message}</div> */}
 
       <div className="images">
         {images.map((image) => (
