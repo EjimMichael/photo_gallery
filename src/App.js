@@ -6,13 +6,13 @@ import useFetch from './useFetch';
 function App() {
   const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const url = `https://api.unsplash.com/photo/?client_id=${accessKey}`;
+  const url = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState('');
 
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
-  const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
+  const searchURL = `https://api.unsplash.com/search/photo?page=1&query=${searchPhotos}&client_id=${accessKey}`;
 
   useEffect(() => {
     axiosCall(url)
@@ -29,9 +29,9 @@ function App() {
       axiosCall(searchURL).then((res) => {
         setResults(res.data.results);
         setImages(results);
-        handleChange('');
+        setSearchPhotos("");
       }).catch(err => {
-        setError(err);
+        setImages(images) || setImages(results) ? setImages("") : setError(err);
       })
     }
   };
