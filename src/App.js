@@ -2,6 +2,8 @@ import './App.css';
 import {useState, useEffect } from 'react';
 import SearchIcon from "@mui/icons-material/Search";
 import useFetch from './useFetch';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const axiosCall = useFetch;
@@ -13,6 +15,13 @@ function App() {
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
   const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
+
+  const alert = () => { 
+    toast.error('Enter an Image name', {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000
+    });
+  }
 
   useEffect(() => {
     axiosCall(url)
@@ -26,7 +35,7 @@ function App() {
   const handleChange = (e) => {    
     if (e.key === "Enter") {
       if (searchPhotos.length === 0) {
-        alert("Enter an Image name");
+        alert();
       } else {
          axiosCall(searchURL)
            .then((res) => {
@@ -54,6 +63,7 @@ function App() {
             placeholder="Search photos"
             onKeyPress={handleChange}
           />
+          <ToastContainer />
           <SearchIcon className="search-icon" />
         </div>
       </div>
