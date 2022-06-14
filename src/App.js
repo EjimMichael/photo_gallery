@@ -25,13 +25,22 @@ function App() {
 
   const handleChange = (e) => {    
     if (e.key === "Enter") {
-      axiosCall(searchURL).then((res) => {
-        setResults(res.data.results);
-        setImages(results);
-        setSearchPhotos('');
-      }).catch(err => {
-        setImages(images) || setImages(results) ? setImages("") : setError(err);
-      })
+      if (searchPhotos.length === 0) {
+        alert("Enter an Image name");
+      } else {
+         axiosCall(searchURL)
+           .then((res) => {
+             setResults(res.data.results);
+             setImages(results);
+             setSearchPhotos("");
+           })
+           .catch((err) => {
+             setImages(images) || setImages(results)
+               ? setImages("")
+               : setError(err);
+           });
+      }
+       
     }
   };
 
