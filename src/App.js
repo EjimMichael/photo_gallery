@@ -4,17 +4,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import useFetch from './useFetch';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MdDownloadForOffline } from 'react-icons/md';
+import Error from './images/Error.PNG'; 
 
 function App() {
   const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const url = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
+  const url = `https://api.unsplash.com/photos/?client_id=${accessKey}&count=30`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState('');
 
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
-  const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}`;
+  const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${searchPhotos}&client_id=${accessKey}&count=30`;
 
   const alert = () => { 
     toast.error('Enter an Image name', {
@@ -27,6 +29,7 @@ function App() {
     axiosCall(url)
     .then(res => {
       setImages(res.data);
+      console.log(res.data);
     }).catch(err => {
       setError(err);
     })
@@ -69,7 +72,17 @@ function App() {
       </div>
       <div className="images">
         {results.map((result) => (
-          <img src={result.urls.regular} key={result.id} alt="" />
+          <div className="md">
+            <img src={result.urls.regular} key={result.id} alt="" />
+            <a
+              href={`${result?.links?.download_location}?client_id=${accessKey}?dl=`}
+              download
+              key={result.id}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <MdDownloadForOffline />
+            </a>
+          </div>
         ))}
       </div>
 
