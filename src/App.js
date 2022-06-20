@@ -232,6 +232,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MdDownloadForOffline } from "react-icons/md";
 import Masonry from "react-masonry-css";
+import Loader from './Loader';
 
 function App() {
   const axiosCall = useFetch;
@@ -239,6 +240,7 @@ function App() {
   const url = `https://api.unsplash.com/photos?client_id=${accessKey}`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
@@ -252,12 +254,15 @@ function App() {
   };
 
   useEffect(() => {
+    setLoading(true);
     axiosCall(url)
       .then((res) => {
+        setLoading(false);
         setImages(res.data);
         console.log(res.data);
       })
       .catch((err) => {
+        setLoading(false);
         setError(err);
       });
   }, [axiosCall, url]);
@@ -267,13 +272,16 @@ function App() {
       if (searchPhotos.length === 0) {
         alert();
       } else {
+        setLoading(true);
         axiosCall(searchURL)
           .then((res) => {
             setResults(res.data.results);
+            setLoading(false);
             setImages(results);
             setSearchPhotos("");
           })
           .catch((err) => {
+            setLoading(false);
             setImages(images) || setImages(results)
               ? setImages("")
               : setError(err);
@@ -303,17 +311,29 @@ function App() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {results.map((result) => (
-          <div className="md">
-            <img src={result?.urls?.regular} key={result.id} alt="" />
+        {!loading ? (
+          results.map((result) => (
+            <div className="md">
+              <img src={result?.urls?.regular} key={result.id} alt="" />
+            </div>
+          ))
+        ) : (
+          <div className="loading">
+            <Loader />
           </div>
-        ))}
+        )}
 
-        {images.map((image) => (
-          <div className="mc">
-            <img src={image.urls.regular} key={image.id} alt="" />
+        {!loading ? (
+          images.map((image) => (
+            <div className="mc">
+              <img src={image.urls.regular} key={image.id} alt="" />
+            </div>
+          ))
+        ) : (
+          <div className="loading">
+            <Loader />
           </div>
-        ))}
+        )}
       </Masonry>
       <div className="error">{error.message}</div>
     </div>
