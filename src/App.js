@@ -231,6 +231,7 @@ import useFetch from "./useFetch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MdDownloadForOffline } from "react-icons/md";
+import Masonry from "react-masonry-css";
 
 function App() {
   const axiosCall = useFetch;
@@ -296,27 +297,24 @@ function App() {
           <SearchIcon className="search-icon" />
         </div>
       </div>
-      <div className="images">
+
+      <Masonry
+        breakpointCols={4}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
         {results.map((result) => (
           <div className="md">
             <img src={result?.urls?.regular} key={result.id} alt="" />
-            <a
-              // onClick={(e) => e.stopPropagation()}
-              href={`${result?.urls?.regular}?dl=`}
-              download
-              // key={result.id}
-            >
-              <MdDownloadForOffline />
-            </a>
           </div>
         ))}
-      </div>
 
-      <div className="images">
         {images.map((image) => (
-          <img src={image.urls.regular} key={image.id} alt="" />
+          <div className="mc">
+            <img src={image.urls.regular} key={image.id} alt="" />
+          </div>
         ))}
-      </div>
+      </Masonry>
       <div className="error">{error.message}</div>
     </div>
   );

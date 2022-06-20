@@ -49,16 +49,14 @@ input {
   padding-left: 10px;
 }
 
-.images {
-    /* max-width: 70rem;
-    margin: 4rem auto; */
+/* .images {
     max-width: 98%;
     margin: 15px auto;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-auto-rows: 500px;
-}
+} */
 
 img {
     width: 100%;
@@ -72,4 +70,22 @@ img {
     margin: auto;
     font-size: 30px;
     font-family: 'Roboto Slab', serif;
+}
+
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 30px;
 }
