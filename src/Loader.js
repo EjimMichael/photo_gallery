@@ -5,11 +5,13 @@ const Loader = () => {
   return (
     <div className="spinner">
       <TailSpin
-        color="#00BFFF"
+        color="#000"
         height={80}
         width={80}
         ariaLabel="loading"
+        text-align="center"
       />
+      
     </div>
   );
 };

@@ -293,7 +293,8 @@ function App() {
   return (
     <div className="App">
       <div className="top">
-        <h1>Dellons Photo Gallery</h1>
+        <h1>Dellons Gallery</h1>
+        <h2>No 1 world HD photos gallery website sourced from unsplash</h2>
         <div className="search-bar">
           <input
             type="text"
@@ -311,17 +312,12 @@ function App() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {!loading ? (
-          results.map((result) => (
+        
+          {results.map((result) => (
             <div className="md">
               <img src={result?.urls?.regular} key={result.id} alt="" />
             </div>
-          ))
-        ) : (
-          <div className="loading">
-            <Loader />
-          </div>
-        )}
+          ))}
 
         {!loading ? (
           images.map((image) => (
