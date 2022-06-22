@@ -237,14 +237,14 @@ import Loader from './Loader';
 function App() {
   const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const url = `https://api.unsplash.com/photos?client_id=${accessKey}`;
+  const url = `https://api.unsplash.com/photos?client_id=${accessKey}&page=1&per_page=35`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchPhotos, setSearchPhotos] = useState("");
   const [results, setResults] = useState([]);
-  const searchURL = `https://api.unsplash.com/search/photos?per_page=20&query=${searchPhotos}&client_id=${accessKey}&count=30`;
+  const searchURL = `https://api.unsplash.com/search/photos?per_page=35git a&query=${searchPhotos}&client_id=${accessKey}`;
 
   const alert = () => {
     toast.error("Enter an Image name", {
@@ -254,15 +254,14 @@ function App() {
   };
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     axiosCall(url)
       .then((res) => {
-        setLoading(false);
+        setIsLoading(false);
         setImages(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
-        setLoading(false);
+        setIsLoading(false);
         setError(err);
       });
   }, [axiosCall, url]);
@@ -272,23 +271,30 @@ function App() {
       if (searchPhotos.length === 0) {
         alert();
       } else {
-        setLoading(true);
+        setIsLoading(true);
         axiosCall(searchURL)
           .then((res) => {
             setResults(res.data.results);
-            setLoading(false);
-            setImages(results);
             setSearchPhotos("");
+            setIsLoading(false);
+            setImages(results);
           })
           .catch((err) => {
-            setLoading(false);
+            setIsLoading(false);
             setImages(images) || setImages(results)
               ? setImages("")
               : setError(err);
           });
       }
-    }
+    } 
   };
+
+  const breakPoint = {
+    default: 4,
+    1280: 3,
+    1024: 2,
+    700: 1
+  }
 
   return (
     <div className="App">
@@ -298,6 +304,7 @@ function App() {
         <div className="search-bar">
           <input
             type="text"
+            value={searchPhotos}
             onChange={(e) => setSearchPhotos(e.target.value)}
             placeholder="Search photos"
             onKeyPress={handleChange}
@@ -308,21 +315,14 @@ function App() {
       </div>
 
       <Masonry
-        breakpointCols={4}
+        breakpointCols={breakPoint}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        
-          {results.map((result) => (
-            <div className="md">
-              <img src={result?.urls?.regular} key={result.id} alt="" />
-            </div>
-          ))}
-
-        {!loading ? (
+        {!isLoading ? (
           images.map((image) => (
             <div className="mc">
-              <img src={image.urls.regular} key={image.id} alt="" />
+              <img src={image?.urls?.regular} key={image.id} alt="" />
             </div>
           ))
         ) : (
@@ -330,6 +330,12 @@ function App() {
             <Loader />
           </div>
         )}
+
+        {results.map((result) => (
+          <div className="md">
+            <img src={result?.urls?.regular} key={result.id} alt="" />
+          </div>
+        ))}
       </Masonry>
       <div className="error">{error.message}</div>
     </div>
