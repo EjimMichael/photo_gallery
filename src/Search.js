@@ -1,13 +1,14 @@
 import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useFetch from "./useFetch";
 
-const Search = ({ accessKey,images, setImages, setIsLoading, setError }) => {
+const Search = ({ searchKey, images, setImages, results, setResults, setIsLoading, setError }) => {
   const [searchPhotos, setSearchPhotos] = useState("");
-  const searchURL = `https://api.unsplash.com/search/photos?per_page=35&query=${searchPhotos}&client_id=${accessKey}`;
+  const searchURL = `https://api.unsplash.com/search/photos?per_page=35&query=${searchPhotos}&client_id=${searchKey}`;
   const axiosCall = useFetch;
-  const [results, setResults] = useState([]);
+  
 
   const alert = () => {
     toast.error("Enter an Image name", {
@@ -38,13 +39,25 @@ const Search = ({ accessKey,images, setImages, setIsLoading, setError }) => {
       }
     }
   };
-  return {
-    handleChange,
-    ToastContainer,
-    results,
-    searchPhotos,
-    setSearchPhotos,
-  };
+  return (
+      <div className="searchBar">
+        <div className="top">
+          <h1>Dellons Gallery</h1>
+          <h2>No 1 world HD photos gallery website sourced from unsplash</h2>
+          <div className="search-bar">
+            <input
+              type="text"
+              value={searchPhotos}
+              onChange={(e) => setSearchPhotos(e.target.value)}
+              placeholder="Search photos"
+              onKeyPress={handleChange}
+            />
+            <ToastContainer />
+            <SearchIcon className="search-icon" />
+          </div>
+        </div>
+      </div>
+  );
 };
  
 export default Search;

@@ -128,20 +128,19 @@
 
 import "./App.css";
 import { useState, useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
 import useFetch from "./useFetch";
-
 import Masonry from "react-masonry-css";
 import Loader from "./Loader";
 import Search from "./Search";
 
-function App({ handleChange, ToastContainer, results, searchPhotos, setSearchPhotos }) {
+function App() {
   const axiosCall = useFetch;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
   const url = `https://api.unsplash.com/photos?client_id=${accessKey}&page=1&per_page=35`;
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [results, setResults] = useState([]);
 
  
 
@@ -166,24 +165,9 @@ function App({ handleChange, ToastContainer, results, searchPhotos, setSearchPho
     700: 1,
   };
 
-  return ({ accessKey, images, setImages, setIsLoading, setError },
+  return (
     <div className="App">
-      <div className="top">
-        <h1>Dellons Gallery</h1>
-        <h2>No 1 world HD photos gallery website sourced from unsplash</h2>
-        <div className="search-bar">
-          <Search />
-            <input
-              type="text"
-              value={searchPhotos}
-              onChange={(e) => setSearchPhotos(e.target.value)}
-              placeholder="Search photos"
-              onKeyPress={handleChange}
-            />
-          <ToastContainer />
-          <SearchIcon className="search-icon" />
-        </div>
-      </div>
+      <Search searchKey={accessKey} images={images} setImages={setImages} results={results} setResults={setResults} setIsLoading={setIsLoading} setError={setError}/>
 
       <Masonry
         breakpointCols={breakPoint}
