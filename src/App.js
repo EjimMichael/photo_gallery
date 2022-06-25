@@ -132,6 +132,7 @@ import useFetch from "./useFetch";
 import Masonry from "react-masonry-css";
 import Loader from "./Loader";
 import Search from "./Search";
+import ImgSrc from "./ImgSrc";
 
 function App() {
   const axiosCall = useFetch;
@@ -167,7 +168,15 @@ function App() {
 
   return (
     <div className="App">
-      <Search searchKey={accessKey} images={images} setImages={setImages} results={results} setResults={setResults} setIsLoading={setIsLoading} setError={setError}/>
+      <Search
+        searchKey={accessKey}
+        images={images}
+        setImages={setImages}
+        results={results}
+        setResults={setResults}
+        setIsLoading={setIsLoading}
+        setError={setError}
+      />
 
       <Masonry
         breakpointCols={breakPoint}
@@ -177,7 +186,8 @@ function App() {
         {!isLoading ? (
           images.map((image) => (
             <div className="random-img" key={image.id}>
-              <img src={image?.urls?.regular} alt="" />
+              {/* <img src={image?.urls?.regular} alt="" /> */}
+              <ImgSrc image={image} />
               {/* <a
                 href={`${image?.urls?.regular}?dl=`}
                 download
@@ -195,7 +205,8 @@ function App() {
 
         {results.map((result) => (
           <div className="search-img" key={result.id}>
-            <img src={result?.urls?.regular} alt="" />
+            {/* <img src={result?.urls?.regular} alt="" /> */}
+            <ImgSrc result={result}/>
           </div>
         ))}
       </Masonry>
