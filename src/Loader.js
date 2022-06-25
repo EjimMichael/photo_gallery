@@ -6,8 +6,8 @@ const Loader = () => {
     <div className="spinner">
       <TailSpin
         color="#000"
-        height={80}
-        width={80}
+        height={50}
+        width={50}
         ariaLabel="loading"
         text-align="center"
       />

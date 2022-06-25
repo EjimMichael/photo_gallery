@@ -6,7 +6,7 @@ import useFetch from "./useFetch";
 
 const Search = ({ searchKey, images, setImages, results, setResults, setIsLoading, setError }) => {
   const [searchPhotos, setSearchPhotos] = useState("");
-  const searchURL = `https://api.unsplash.com/search/photos?per_page=35&query=${searchPhotos}&client_id=${searchKey}`;
+  const searchURL = `https://api.unsplash.com/search/photos?per_page=50&query=${searchPhotos}&client_id=${searchKey}`;
   const axiosCall = useFetch;
   
 
@@ -39,6 +39,7 @@ const Search = ({ searchKey, images, setImages, results, setResults, setIsLoadin
       }
     }
   };
+
   return (
       <div className="searchBar">
         <div className="top">
