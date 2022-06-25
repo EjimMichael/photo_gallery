@@ -8,13 +8,14 @@ Dellons photo gallery is also user friendly and interactive so you won't have a 
 
 ### The User Interface
 
-![The UI](./src/images/bg-UI.PNG)
+![The UI-BACKGROUND](./src/images/bg-UI.PNG)
+![The UI-IMAGES](./src/images/bg-UI2.PNG)
 When the website launches, it loads images from different categories and displays it for our view. 
 The search field located at the top middle corner of the screen allows you to search any image of your choice and it gets displayed on the screen.
 
 ### Error 
 
-![The UI](./src/images/Error.PNG)
+![Error](./src/images/Error404.PNG)
 When a user sends a bad request or when there is a bad network connection, a 404 error will be displayed on the screen showing that the request failed.
 
 ### Useful Links
