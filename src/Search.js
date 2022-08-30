@@ -17,8 +17,9 @@ const Search = ({ searchKey, images, setImages, results, setResults, setIsLoadin
     });
   };
 
-  const handleChange = (e) => {
-    if (e.key === "Enter") {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+   
       if (searchPhotos.length === 0) {
         alert();
       } else {
@@ -37,27 +38,28 @@ const Search = ({ searchKey, images, setImages, results, setResults, setIsLoadin
               : setError(err);
           });
       }
-    }
   };
 
   return (
-      <div className="searchBar">
-        <div className="top">
-          <h1>Dellons Gallery</h1>
-          <h2>No 1 world HD photos gallery website sourced from unsplash</h2>
+    <div className="searchBar">
+      <div className="top">
+        <h1>Dellons Gallery</h1>
+        <h2>No 1 world HD photos gallery website sourced from unsplash</h2>
+
+        <form onSubmit={handleSubmit}>
           <div className="search-bar">
             <input
               type="text"
               value={searchPhotos}
               onChange={(e) => setSearchPhotos(e.target.value)}
-              placeholder="Search photos"
-              onKeyPress={handleChange}
+              placeholder="Search photos"            
             />
             <ToastContainer />
             <SearchIcon className="search-icon" />
           </div>
-        </div>
+        </form>
       </div>
+    </div>
   );
 };
  
